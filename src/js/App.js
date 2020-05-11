@@ -32,7 +32,7 @@ export default class App extends React.Component {
           <div className="col">
             <input type="text" onChange={this.inputTyped} value={this.state.input} className="form-control w-25 d-inline align-middle" />
             &nbsp;
-            <button onClick={this.buttonClick} className="btn btn-secondary btn-small d-inline align-middle " >Add</button>
+            <button onClick={this.buttonClick} className="btn btn-secondary d-inline align-middle " >Add</button>
           </div>
         </div>
 
@@ -55,9 +55,7 @@ export default class App extends React.Component {
   }
 
   generateTaskArray() {
-    console.log("generateTaskArray");
     var tasks = this.getTasks().tasks;
-    console.log(tasks);
     var taskArray = []
     for (var i = 0; i < tasks.length; i++) {
       taskArray.push(<Task value={tasks[i]} key={i} removeTask={this.removeTask} taskId={i} />);
@@ -94,9 +92,9 @@ class Task extends React.Component {
   render() {
     if (this.state.value !== null) {
       return (
-        <div className="pointer row" onClick={() => { this.props.removeTask(this.props.taskId) }} >
-          <div className="col">
-            {this.state.value}
+        <div className="row justify-content-center" onClick={() => { this.props.removeTask(this.props.taskId) }} >
+          <div className="col-4 pointer bg-dark" style={{ height: "2em", borderRadius: "10px", marginBottom: "5px", color: "white" }} >
+            <span className="text-center align-middle" >{this.state.value}</span>
           </div>
         </div>
       )
