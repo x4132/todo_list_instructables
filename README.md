@@ -2,7 +2,8 @@
 simple todo list.<br />
 [link to instructables](https://www.instructables.com/id/React-Intermediate-Tutorial/)<br />
 A simple todo list with:
-[ReactJS](https://reactjs.org/)
+[Yarn](https://yarnpkg.com/)
+[ReactJS](https://reactjs.org/)<br />
 [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
