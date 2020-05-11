@@ -2,8 +2,7 @@ import React from 'react';
 import '../css/App.css';
 
 export default class App extends React.Component {
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
     this.state = {
       taskArray: [],
@@ -11,52 +10,75 @@ export default class App extends React.Component {
     }
 
     this.buttonClick = this.buttonClick.bind(this);
-    this.inputTyped=this.inputTyped.bind(this);
-    this.generateTaskArray=this.generateTaskArray.bind(this);
-    this.saveTasks=this.saveTasks.bind(this);
-    this.getTasks=this.getTasks.bind(this);
-    this.removeTask=this.removeTask.bind(this);
+    this.inputTyped = this.inputTyped.bind(this);
+    this.generateTaskArray = this.generateTaskArray.bind(this);
+    this.saveTasks = this.saveTasks.bind(this);
+    this.getTasks = this.getTasks.bind(this);
+    this.removeTask = this.removeTask.bind(this);
+  }
+
+  componentDidMount() {
+    this.generateTaskArray();
   }
 
   render() {
     return (
-      <div>
+      <div className="text-center container" >
+        <br />
+        <br />
         {this.state.taskArray}
-        <input type="text" onChange={this.inputTyped} value={this.state.input} /><button onClick={this.buttonClick} >Add</button>
+        <br />
+        <div className="row">
+          <div className="col">
+            <input type="text" onChange={this.inputTyped} value={this.state.input} className="form-control w-25 d-inline align-middle" />
+            &nbsp;
+            <button onClick={this.buttonClick} className="btn btn-secondary btn-small d-inline align-middle " >Add</button>
+          </div>
+        </div>
+
       </div>
     )
   }
 
-  buttonClick()
-  {
-
+  buttonClick() {
+    if (this.state.input !== "") {
+      var taskList = this.getTasks();
+      taskList.tasks.push(this.state.input);
+      this.saveTasks(taskList);
+      this.generateTaskArray();
+      this.setState({ input: "" })
+    }
   }
 
-  inputTyped(evt)
-  {
-    this.setState({input: evt.target.value});
-  }
-  
-  generateTaskArray()
-  {
-
+  inputTyped(evt) {
+    this.setState({ input: evt.target.value });
   }
 
-  saveTasks(tasks)
-  {
+  generateTaskArray() {
+    console.log("generateTaskArray");
+    var tasks = this.getTasks().tasks;
+    console.log(tasks);
+    var taskArray = []
+    for (var i = 0; i < tasks.length; i++) {
+      taskArray.push(<Task value={tasks[i]} key={i} removeTask={this.removeTask} taskId={i} />);
+    }
+
+    this.setState({ taskArray: taskArray });
+  }
+
+  saveTasks(tasks) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
-  getTasks()
-  {
-    if (localStorage.getItem("tasks") === null) return {}
+  getTasks() {
+    if (localStorage.getItem("tasks") === null) return { tasks: [] }
     else return JSON.parse(localStorage.getItem("tasks"));
   }
 
-  removeTask(id)
-  {
+  removeTask(id) {
     var tasks = this.getTasks();
-    delete tasks.tasks[id];
+    tasks.tasks.splice(id, 1);
+    this.saveTasks(tasks);
     this.generateTaskArray();
   }
 }
@@ -70,10 +92,15 @@ class Task extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.state.value}
-      </div>
-    )
+    if (this.state.value !== null) {
+      return (
+        <div className="pointer row" onClick={() => { this.props.removeTask(this.props.taskId) }} >
+          <div className="col">
+            {this.state.value}
+          </div>
+        </div>
+      )
+    }
+    else return null;
   }
 }
