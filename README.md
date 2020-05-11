@@ -1,5 +1,4 @@
-### (instructables) todo list
-<hr />
+## (instructables) todo list
 simple todo list.
 [link to instructables](https://www.instructables.com/id/React-Intermediate-Tutorial/)
 
