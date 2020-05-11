@@ -1,6 +1,6 @@
 ## (instructables) todo list
-simple todo list.
-[link to instructables](https://www.instructables.com/id/React-Intermediate-Tutorial/)
+simple todo list.<br />
+[link to instructables](https://www.instructables.com/id/React-Intermediate-Tutorial/)<br />
 A simple todo list with:
 
 [Create React App](https://github.com/facebook/create-react-app).
