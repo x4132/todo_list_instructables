@@ -1,3 +1,8 @@
+### (instructables) todo list
+simple todo list.
+[link to instructables](https://www.instructables.com/id/React-Intermediate-Tutorial/)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
